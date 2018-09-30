@@ -18,27 +18,34 @@
 
 @section('script')
 <script type="text/javascript">
+    $("#mn_register").addClass('active');
     $( "#btn" ).click(function(e) {
         e.preventDefault();
-        $.ajax({
-            url: '/register',
-            type: 'post',
-            data: $('#formRegister').serialize(), // Remember that you need to have your csrf token included
-            dataType: 'json',
-            success: function( data ){
-                var arrData = JSON.parse(JSON.stringify(data));
-                //alert(arrData.msg);
-                if(arrData.status == "sukses"){
-                    $('#msg').css('color','#1bff00');
-                    $('#msg').html(arrData.msg);
-                    setTimeout(function(){ window.location = '/login'; }, 3000);
-                }else{
-                    $('#msg').css('color','#fd5656'); 
-                    $('#msg').html(arrData.msg);
+        if ($('#username').val() == "" || $('#password').val() == "" || $('#email').val() == "" || $('#name').val() == "") {
+            $('#msg').css('color','#fd5656'); 
+            $('#msg').html('Isikan semua field registrasi');
+        }else{
+            $.ajax({
+                url: '/register',
+                type: 'post',
+                data: $('#formRegister').serialize(), // Remember that you need to have your csrf token included
+                dataType: 'json',
+                success: function( data ){
+                    var arrData = JSON.parse(JSON.stringify(data));
+                    //alert(arrData.msg);
+                    if(arrData.status == "sukses"){
+                        $('#msg').css('color','#1bff00');
+                        $('#msg').html(arrData.msg);
+                        setTimeout(function(){ window.location = '/login'; }, 3000);
+                    }else{
+                        $('#msg').css('color','#fd5656'); 
+                        $('#msg').html(arrData.msg);
+                    }
+                    
                 }
-                
-            }
-        });
+            });
+        }
+        
     });
 </script>
 @endsection

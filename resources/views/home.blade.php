@@ -10,18 +10,22 @@
     <body class="is-preload">
 
         <!-- Sidebar -->
-            <section id="sidebar">
+            <section id="sidebar" style="overflow-y: inherit;overflow-x: inherit;">
+                <div class="col-12 col-12-xsmall">
+                    <h1 style="font-size: 23px;margin-bottom: -2%">Word Scramble</h1>
+                </div>
                 <div class="inner">
                     <nav>
                         @if (Session::get('LOGGED'))
                         <ul>
-                            <li><a href="#intro">Play</a></li>
-                            <li><a href="#one">Score</a></li>
+                            <li><a href="{{url('/play')}}" id="mn_play" class="scrolly ">Play</a></li>
+                            <li><a href="{{url('/highscore')}}" id="mn_score" class="scrolly ">Score</a></li>
+                            <li><a href="{{url('/logout')}}">logout</a></li>
                         </ul>
                         @else
                         <ul>
-                            <li><a href="{{url('/login')}}">Login</a></li>
-                            <li><a href="{{url('/register')}}">Register</a></li>
+                            <li><a href="{{url('/login')}}" id="mn_login" class="scrolly ">Login</a></li>
+                            <li><a href="{{url('/register')}}" id="mn_register" class="scrolly ">Register</a></li>
                         </ul>
                         @endif
                     </nav>
@@ -30,7 +34,7 @@
 
         <!-- Wrapper -->
             <div id="wrapper">
-
+                    
                 <!-- Intro -->
                     <section id="intro" class="wrapper style1 fullscreen fade-up">
                         <div class="inner">
